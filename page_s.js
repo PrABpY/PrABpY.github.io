@@ -303,3 +303,31 @@ function Fadein_img11_11() {
    document.getElementById('t1').style.opacity = opacity_img11_t;
    document.getElementById('p1').style.opacity = opacity_img11_t;
 }  
+
+const targetDate = new Date('January 1, 2025 00:00:00').getTime();
+// const targetDate = new Date('December 31, 2024 12:43:00').getTime();
+
+// ฟังก์ชันสำหรับการอัปเดตตัวนับถอยหลัง
+function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    // คำนวณเวลาที่เหลือในวัน ชั่วโมง นาที และวินาที
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    // แสดงผลเวลาที่เหลือใน HTML
+    document.getElementById('countdown').innerHTML =
+        `<span class='time'>${hours}</span>h <span class='time'>${minutes}</span>m <span class='time'>${seconds}</span>s`;
+
+    // หากถึงวันเป้าหมายแล้ว ให้เปลี่ยนหน้าไปยังเว็บไซต์ใหม่
+    if (timeLeft <= 0) {
+        clearInterval(interval);
+        window.location.href = 'HBD-FIRST.html'; // แก้ไข URL ตามที่คุณต้องการ
+    }
+}
+
+// อัปเดตตัวนับถอยหลังทุก ๆ 1 วินาที
+const interval = setInterval(updateCountdown, 1000);

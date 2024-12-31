@@ -320,7 +320,7 @@ function updateCountdown() {
 
     // แสดงผลเวลาที่เหลือใน HTML
     document.getElementById('countdown').innerHTML =
-        `<span class='time'>${hours}</span>h <span class='time'>${minutes}</span>m <span class='time'>${seconds}</span>s`;
+        `<span class='time'>${days}</span>D <span class='time'>${hours}</span>h <span class='time'>${minutes}</span>m <span class='time'>${seconds}</span>s`;
 
     // หากถึงวันเป้าหมายแล้ว ให้เปลี่ยนหน้าไปยังเว็บไซต์ใหม่
     if (timeLeft <= 0) {

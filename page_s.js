@@ -304,7 +304,7 @@ function Fadein_img11_11() {
    document.getElementById('p1').style.opacity = opacity_img11_t;
 }  
 
-const targetDate = new Date('January 1, 2025 00:00:00').getTime();
+const targetDate = new Date('January 1, 2025 21:00:00').getTime();
 // const targetDate = new Date('December 31, 2024 12:43:00').getTime();
 
 // ฟังก์ชันสำหรับการอัปเดตตัวนับถอยหลัง

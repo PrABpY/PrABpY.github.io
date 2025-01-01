@@ -13,7 +13,14 @@ for (var i = 0; i < 15; i++) {
   addCircle(i * 150, [10 + 600, 300], emoji[Math.floor(Math.random() * emoji.length)]);
 }
 
-
+const preloadImage1 = new Image();
+const preloadImage2 = new Image();
+const preloadImage3 = new Image();
+const preloadImage4 = new Image();
+preloadImage1.src = "img/1.jpg";
+preloadImage2.src = "img/2.jpg";
+preloadImage3.src = "img/3.jpg";
+preloadImage4.src = "img/4.jpg";
 
 function addCircle(delay, range, color) {
   setTimeout(function() {
@@ -110,7 +117,7 @@ function myMove() {
 
 var opacity_bg = 0;
 function Fadebg() {
-   document.getElementById("p1").src = "img/1.jpg";
+   document.getElementById("p1").src = preloadImage1.src;
    if (opacity_bg<1) {
       opacity_bg += .01;
       setTimeout(function(){Fadebg()},10);
@@ -160,7 +167,7 @@ function Fadeout_img2() {
 var opacity_img3_t = 0;
 var opacity_img3_p = 0;
 function Fadein_img3() {
-  document.getElementById("p1").src = "img/2.jpg";
+  document.getElementById("p1").src = preloadImage2.src;
   if (opacity_img3_p<1) {
       opacity_img3_p += .01;
       setTimeout(function(){Fadein_img3()},10);
@@ -207,7 +214,7 @@ function Fadeout_img44() {
 
 var opacity_img5_p = 0;
 function Fadein_img5() {
-  document.getElementById("p1").src = "img/3.jpg";
+  document.getElementById("p1").src = preloadImage3.src;
   if (opacity_img5_p<1) {
       opacity_img5_p += .01;
       setTimeout(function(){Fadein_img5()},10);
@@ -295,7 +302,7 @@ function Fadeout_img1010() {
 var opacity_img11_t = 0;
 function Fadein_img11_11() {
   document.getElementById("t1").innerHTML = "🩷 I LOVE YOU FOREVER 🩷";
-  document.getElementById("p1").src = "img/4.jpg";
+  document.getElementById("p1").src = preloadImage4.src;
    if (opacity_img11_t<1) {
       opacity_img11_t += .01;
       setTimeout(function(){Fadein_img11_11()},10);

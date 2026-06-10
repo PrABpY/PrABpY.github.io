@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
     }
 
-    let ws = new WebSocket("wss://tpqi-aiservices-uat.tpqi.go.th/ws/<task_id>");
+    let ws = new WebSocket("wss://tpqi-aiservices-uat.tpqi.go.th/ws/8b1f108e-1d8f-4400-8d4d-5cd2da834aa5");
 
     ws.onopen = () => console.log("✅ Connected!");
     ws.onmessage = (e) => console.log("📩 Message:", e.data);

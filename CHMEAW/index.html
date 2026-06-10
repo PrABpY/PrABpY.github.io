@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07111f" />
+  <title>Graduation Money Hub</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <div class="brand-mark">GM</div>
+        <div>
+          <p class="eyebrow">Google Sheet Control Panel</p>
+          <h1>Graduation Money Hub</h1>
+        </div>
+      </div>
+      <p class="sidebar-copy">แดชบอร์ดสำหรับตรวจโอน รายชื่อผู้ติดต่อ และตั้งค่ายอดเก็บเงินแบบครบชุด</p>
+      <nav class="nav-stack">
+        <button class="nav-link active" data-nav="dashboard">Dashboard</button>
+        <button class="nav-link" data-nav="payments">ตรวจสอบโอนเงิน</button>
+        <button class="nav-link" data-nav="members">เช็ครายชื่อ</button>
+        <button class="nav-link" data-nav="settings">ตั้งค่า</button>
+      </nav>
+      <div class="sidebar-card">
+        <span class="sidebar-card-label">สถานะระบบ</span>
+        <strong id="connection-status">กำลังโหลดข้อมูล</strong>
+        <small id="last-refresh">-</small>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero-panel">
+        <div>
+          <p class="eyebrow">Graduate payment workspace</p>
+          <h2>จัดการข้อมูลโอนเงินและรายชื่อในที่เดียว</h2>
+          <p class="hero-copy">ดึงข้อมูลจากชีท <span>database</span> และ <span>รายชื่อ</span> มาแสดงเป็นการ์ด พร้อมปุ่มยืนยัน ดูภาพ slip และแก้ไขข้อมูลได้ทันที</p>
+        </div>
+        <div class="hero-actions">
+          <button id="refresh-all" class="primary-btn">รีเฟรชข้อมูล</button>
+          <button id="jump-payments" class="ghost-btn">ไปหน้าตรวจโอน</button>
+        </div>
+      </section>
+
+      <div id="status-message" class="status-banner"></div>
+
+      <section class="panel view-panel active" data-view="dashboard">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">หน้า 1</p>
+            <h3>Dashboard</h3>
+          </div>
+          <span class="section-hint">สรุปยอดรวมและจำนวนผู้ชำระ</span>
+        </div>
+        <div id="dashboard-metrics" class="metric-grid"></div>
+        <div id="dashboard-summary" class="summary-grid"></div>
+      </section>
+
+      <section class="panel view-panel" data-view="payments">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">หน้า 2</p>
+            <h3>ตรวจสอบคนโอนเงินเข้า</h3>
+          </div>
+        </div>
+        <div id="payments-grid" class="card-grid"></div>
+      </section>
+
+      <section class="panel view-panel" data-view="members">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">หน้า 3</p>
+            <h3>เช็ครายชื่อคนที่ add line</h3>
+          </div>
+          <span class="section-hint">แก้ไขข้อมูลและดูยอดค้างชำระ</span>
+        </div>
+        <div id="members-grid" class="card-grid"></div>
+      </section>
+
+      <section class="panel view-panel" data-view="settings">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">หน้า 4</p>
+            <h3>ตั้งค่า</h3>
+          </div>
+          <span class="section-hint">กำหนดยอดเก็บ เงินครบกำหนด และข้อความแจ้งเตือน</span>
+        </div>
+        <form id="settings-form" class="settings-form">
+          <div class="field-group">
+            <label for="collection_name">ชื่อโครงการ</label>
+            <input id="collection_name" name="collection_name" type="text" placeholder="เช่น งานรับปริญญา" />
+          </div>
+          <div class="field-group">
+            <label for="amount_per_person">จำนวนเงินที่ต้องเก็บต่อคน</label>
+            <input id="amount_per_person" name="amount_per_person" type="number" min="0" step="1" placeholder="2000" />
+          </div>
+          <div class="field-group">
+            <label for="deadline">กำหนดเสร็จสิ้น</label>
+            <input id="deadline" name="deadline" type="date" />
+          </div>
+          <div class="field-group field-span-2">
+            <label for="note">หมายเหตุ</label>
+            <textarea id="note" name="note" rows="4" placeholder="บันทึกเงื่อนไขเพิ่มเติม"></textarea>
+          </div>
+          <div class="field-group field-span-2">
+            <label for="line_message_template">ข้อความส่งเข้า LINE เมื่อยืนยัน</label>
+            <input id="line_message_template" name="line_message_template" type="text" placeholder="ยอดจำนวน {amount} ยืนยันเรียบร้อย" />
+          </div>
+          <div class="form-actions field-span-2">
+            <button type="submit" class="primary-btn">บันทึกการตั้งค่า</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div id="image-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card modal-large">
+      <button class="modal-close" data-close-modal aria-label="ปิด">×</button>
+      <div class="modal-media-wrap">
+        <img id="image-preview" alt="ภาพสลิป" />
+      </div>
+      <div class="modal-meta">
+        <h4 id="image-modal-title">ภาพสลิป</h4>
+        <p id="image-modal-subtitle"></p>
+      </div>
+    </div>
+  </div>
+
+  <div id="member-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-backdrop" data-close-member-modal></div>
+    <div class="modal-card">
+      <button class="modal-close" data-close-member-modal aria-label="ปิด">×</button>
+      <h4>แก้ไขข้อมูลรายชื่อ</h4>
+      <form id="member-form" class="modal-form">
+        <input type="hidden" id="member-row" />
+        <div class="field-group">
+          <label for="member-line-name">ชื่อไลน์</label>
+          <input id="member-line-name" type="text" />
+        </div>
+        <div class="field-group">
+          <label for="member-real-name">ชื่อจริง</label>
+          <input id="member-real-name" type="text" />
+        </div>
+        <div class="field-group">
+          <label for="member-student-id">รหัสนักศึกษา</label>
+          <input id="member-student-id" type="text" />
+        </div>
+        <div class="field-group">
+          <label for="member-check">สถานะ</label>
+          <input id="member-check" type="text" placeholder="เช่น Confirmed" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="ghost-btn" data-close-member-modal>ยกเลิก</button>
+          <button type="submit" class="primary-btn">บันทึกข้อมูล</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>

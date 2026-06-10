@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SummarizeAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="video-section">
+                <div class="video-wrapper">
+                    <div class="video-placeholder" id="video-placeholder">
+                        <div class="video-placeholder-icon" id="upload-video-icon">🎬</div>
+                    </div>
+                    <input type="file" id="file-input" accept="video/mp4" hidden>
+                    <video id="main-video" controls style="display:none;"></video>
+                    <!-- Loading overlay -->
+                    <div id="video-loading-overlay" class="loading-overlay" style="display: none;">
+                        <div class="spinner"></div>
+                        <p id="loading-status">กำลังเตรียมการ...</p>
+                        <div class="progress-bar-container">
+                            <div id="loading-progress" class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-metadata">
+                    <h2 id="meta-title">กรุณาอัปโหลดวิดีโอการประชุม</h2>
+                    <p id="meta-details">📅 - • ⏱ - • 💾 -</p>
+                </div>
+            </div>
+            <button class="action-btn primary" id="new-summary-btn">➕ เพิ่ม Video</button>
+            <div class="library-section">
+                <div class="library-header">
+                    <h3>คลังวิดีโอของคุณ</h3>
+                    <div class="library-controls">
+                        <input type="text" placeholder="🔍 ค้นหาวิดีโอ..." class="search-input" id="search-input">
+                    </div>
+                </div>
+                <div class="video-list">
+                    <table class="library-table">
+                        <thead>
+                            <tr>
+                                <th>ชื่อวิดีโอ</th>
+                                <th>วันที่</th>
+                                <th>ความยาว</th>
+                                <th>ขนาด</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="video-list-body">
+                            <!-- JS will populate rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Summary Panel -->
+        <aside class="summary-panel" id="summary-panel">
+            <div class="panel-tabs">
+                <button class="panel-tab active" data-tab="summary" style="width: 100%;">📋 สรุป</button>
+            </div>
+
+            <div class="panel-content" id="panel-content">
+                <!-- Summary Tab -->
+                <div id="tab-summary" class="tab-pane active">
+                    <div class="summary-overview">
+                        <h4 style="margin-bottom: 8px;">✨ สรุปประเด็นสำคัญ</h4>
+                        <p id="summary-overview-text">ยังไม่มีข้อมูลสรุป อัปโหลดวิดีโอเพื่อเริ่มต้น</p>
+                    </div>
+                    <div class="summary-accordion" id="summary-accordion">
+                        <!-- JS will populate -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <button class="outline-btn full-width" id="copy-summary-btn">📋 คัดลอกสรุปทั้งหมด</button>
+            </div>
+        </aside>
+    </div>
+    <div id="toast" class="toast hidden"></div>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

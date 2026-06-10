@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Library API Functions ===
     async function loadLibraryFromServer() {
         try {
-            const res = await fetch('/videos/');
+            const res = await fetch('https://tpqi-aiservices-uat.tpqi.go.th/videos/');
             if (res.ok) {
                 videoLibrary = await res.json();
                 renderLibrary();
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('ต้องการลบวิดีโอนี้ออกจากคลังหรือไม่?')) return;
 
         try {
-            const res = await fetch(`/videos/${videoId}`, { method: 'DELETE' });
+            const res = await fetch(`https://tpqi-aiservices-uat.tpqi.go.th/videos/${videoId}`, { method: 'DELETE' });
             if (res.ok) {
                 videoLibrary = videoLibrary.filter(v => v.id !== videoId);
                 if (activeVideoId === videoId) {
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('file', file);
 
         try {
-            const res = await fetch('/upload/', { method: 'POST', body: formData });
+            const res = await fetch('https://tpqi-aiservices-uat.tpqi.go.th/upload/', { method: 'POST', body: formData });
             const data = await res.json();
             if (data.task_id) {
                 // Replace temp entry with real one from server
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function connectWebSocket(taskId, videoObj) {
         if (currentWs) currentWs.close();
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        currentWs = new WebSocket(`${protocol}//${window.location.host}/ws/${taskId}`);
+        currentWs = new WebSocket(`wss://tpqi-aiservices-uat.tpqi.go.th/ws/${taskId}`);
 
         currentWs.onmessage = (event) => {
             const data = JSON.parse(event.data);

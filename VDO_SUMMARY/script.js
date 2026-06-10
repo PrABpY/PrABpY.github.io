@@ -253,6 +253,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.value = '';
     }
 
+    let ws = new WebSocket("wss://tpqi-aiservices-uat.tpqi.go.th/ws/<task_id>");
+
+    ws.onopen = () => console.log("✅ Connected!");
+    ws.onmessage = (e) => console.log("📩 Message:", e.data);
+    ws.onerror = (e) => console.error("❌ Error:", e);
+    ws.onclose = () => console.log("🔒 Closed");
+
     function connectWebSocket(taskId, videoObj) {
         if (currentWs) currentWs.close();
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
